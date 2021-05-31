@@ -1,13 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, useColorScheme } from 'react-native';
+import { ThemeProvider } from '@shopify/restyle';
+import { theme, darkTheme } from './src/theme';
+import { NavigationContainer } from '@react-navigation/native';
 
-export default function App() {
+import { MainNavigator } from '~/presentation/navigators';
+
+export default function App(): unknown {
+  const colorScheme = useColorScheme();
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ThemeProvider theme={colorScheme === 'light' ? theme : darkTheme}>
+      <NavigationContainer>
+        <MainNavigator />
+      </NavigationContainer>
+    </ThemeProvider>
   );
 }
 
